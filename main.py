@@ -5,6 +5,7 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from  instructions import *
+from ruffier import *
 
 age = 7
 name = ""
@@ -100,7 +101,7 @@ class PulseScr(Screen):
 class CheckSits(Screen):
   def __init__(self, **kwargs):
       super().__init__(**kwargs)
-      instr = Label(text=txt_sits)
+      instr = Label(text=TWO_INSTRUCTION_TEXT)
       self.btn = Button(text=NEXT_INPUT_TEXT, size_hint=(0.3, 0.2), pos_hint={'center_x': 0.5})
       self.btn.on_press = self.next
       outer = BoxLayout(orientation='vertical', padding=8, spacing=8)
@@ -116,9 +117,9 @@ class PulseScr2(Screen):
 
       self.stage = 0
       super().__init__(**kwargs)
-      instr = Label(text=txt_test3)
+      instr = Label(text=THREE_INSTRUCTION_TEXT)
       line1 = BoxLayout(size_hint=(0.8, None), height='30sp')
-      self.lbl_sec = Seconds(15)
+      self.lbl_sec = S(15)
       self.lbl_sec.bind(done=self.sec_finished)
       self.lbl1 = Label(text='Считайте пульс')
 
@@ -164,7 +165,7 @@ class PulseScr2(Screen):
          elif self.stage == 2:
              self.in_result2.set_disabled(False)
              self.btn.set_disabled(False)
-             self.btn.text = 'Завершить'
+             self.btn.text = END_INPUT_TEXT
              self.next_screen = True
   def next(self):
       if not self.next_screen:
@@ -193,7 +194,7 @@ class Result(Screen):
       self.on_enter = self.before
     def before(self):
       global name
-      self.instr.text = name + '\n' + test(p1, p2, p3, age)
+      self.instr.text = name + '\n' + str(p1, p2, p3, age)
 class HeartCheck(App):
     def build(self):
       sm = ScreenManager()
